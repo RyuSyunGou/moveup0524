@@ -351,6 +351,21 @@
                     </div>
                 </div>
 
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h3>過去半年(2018.10~2019.03) コイン数統計
+                                <small></small>
+                            </h3>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content" style="height: 204px">
+                            <canvas id="coin_chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
         </div>
@@ -418,6 +433,7 @@
     $(document).ready(function() {
         init_chart_doughnut();
         init_gauge();
+        init_coin_chart();
     });
 
     function init_chart_doughnut(){
@@ -535,8 +551,29 @@
             chart_gauge_02.setTextField(document.getElementById("gauge-text2"));
 
         }
+    }
 
+    function init_coin_chart() {
+        let context = document.querySelector("#coin_chart").getContext('2d')
 
+        new Chart(context, {
+            type: 'line',
+            data: {
+                labels: ['${dashboardForm.coinYearMonth.yearMonth1}', '${dashboardForm.coinYearMonth.yearMonth2}', '${dashboardForm.coinYearMonth.yearMonth3}',
+                    '${dashboardForm.coinYearMonth.yearMonth4}', '${dashboardForm.coinYearMonth.yearMonth5}', '${dashboardForm.coinYearMonth.yearMonth6}'],
+                datasets: [{
+                    label: '円',
+                    data: [${dashboardForm.coinAmount.amount1}, ${dashboardForm.coinAmount.amount2}, ${dashboardForm.coinAmount.amount3},
+                        ${dashboardForm.coinAmount.amount4}, ${dashboardForm.coinAmount.amount5}, ${dashboardForm.coinAmount.amount6}],
+                    borderColor: "#9B59B6",
+                    backgroundColor: "#d4b8e0"
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        })
     }
 </script>
 </html>

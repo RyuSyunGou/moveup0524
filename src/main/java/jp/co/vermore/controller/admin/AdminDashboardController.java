@@ -2,6 +2,7 @@ package jp.co.vermore.controller.admin;
 
 import jp.co.vermore.common.Constant;
 import jp.co.vermore.common.util.DateUtil;
+import jp.co.vermore.entity.DashboardCoinCount;
 import jp.co.vermore.entity.News;
 import jp.co.vermore.entity.Person;
 import jp.co.vermore.entity.User;
@@ -45,6 +46,9 @@ public class AdminDashboardController {
 
     @Autowired
     private EventService eventService;
+
+    @Autowired
+    private DashboardService dashboardService;
 
     @Autowired
     private FreePaperService freePaperService;
@@ -141,6 +145,27 @@ public class AdminDashboardController {
         dashboardForm.setNews(String.valueOf(newsService.getNewsCount()));
         dashboardForm.setEvent(String.valueOf(eventService.getEventCount()));
         dashboardForm.setFreepaper(String.valueOf(freePaperService.getFreePaperCount()));
+
+        // 2023.01.30 張
+        // バッチサンプル
+        List<DashboardCoinCount> coinCountList = dashboardService.getNearlySix();
+        Map mapCoinYearMonth=new HashMap();
+        mapCoinYearMonth.put("yearMonth1", coinCountList.get(0).getMonthYear());
+        mapCoinYearMonth.put("yearMonth2", coinCountList.get(1).getMonthYear());
+        mapCoinYearMonth.put("yearMonth3", coinCountList.get(2).getMonthYear());
+        mapCoinYearMonth.put("yearMonth4", coinCountList.get(3).getMonthYear());
+        mapCoinYearMonth.put("yearMonth5", coinCountList.get(4).getMonthYear());
+        mapCoinYearMonth.put("yearMonth6", coinCountList.get(5).getMonthYear());
+        dashboardForm.setCoinYearMonth(mapCoinYearMonth);
+
+        Map mapCoinAmount=new HashMap();
+        mapCoinAmount.put("amount1", coinCountList.get(0).getCoinAmount());
+        mapCoinAmount.put("amount2", coinCountList.get(1).getCoinAmount());
+        mapCoinAmount.put("amount3", coinCountList.get(2).getCoinAmount());
+        mapCoinAmount.put("amount4", coinCountList.get(3).getCoinAmount());
+        mapCoinAmount.put("amount5", coinCountList.get(4).getCoinAmount());
+        mapCoinAmount.put("amount6", coinCountList.get(5).getCoinAmount());
+        dashboardForm.setCoinAmount(mapCoinAmount);
 
         model.addAttribute("dashboardForm", dashboardForm);
         return "admin/index";

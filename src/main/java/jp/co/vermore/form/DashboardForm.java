@@ -31,6 +31,10 @@ public class DashboardForm extends BaseForm {
 
     private Map gender;
 
+    private Map coinYearMonth;
+
+    private Map coinAmount;
+
     private String news;
 
     private String event;
@@ -123,5 +127,21 @@ public class DashboardForm extends BaseForm {
 
     public void setGender(Map gender) {
         this.gender = gender;
+    }
+
+    public Map getCoinYearMonth() {
+        return coinYearMonth;
+    }
+
+    public void setCoinYearMonth(Map coinYearMonth) {
+        this.coinYearMonth = coinYearMonth;
+    }
+
+    public Map getCoinAmount() {
+        return coinAmount;
+    }
+
+    public void setCoinAmount(Map coinAmount) {
+        this.coinAmount = coinAmount;
     }
 }
