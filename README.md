@@ -15,7 +15,9 @@ MoveUp API & admin project.
 
 ### How to install ###
 * Import as maven project
-* Run spec/moveup.sql to build DB
+* Run 2 dumpSQL in moveup-db  to build DB
+  * Dump20210119.sql
+  * Dump20230130_batch.sql
 * Run app with tomcat
 
 ### Trouble Shooting ###
